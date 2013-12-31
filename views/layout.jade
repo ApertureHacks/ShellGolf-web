@@ -7,23 +7,26 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='//code.jquery.com/jquery.js')
   body
-    div(id='wrap')
-      div(class='navbar navbar-default navbar-fixed-top')
-        div(class='container')
-          div(class='navbar-header')
-            a(class='navbar-brand', href='/')= title
-          div(class='navbar-collapse collapse')
-            ul(class='nav navbar-nav navbar-right')
+    div#wrap
+      div.navbar.navbar-default.navbar-fixed-top
+        div.container
+          div.navbar-header
+            a.navbar-brand(href='/')= title
+          div.navbar-collapse.collapse
+            ul.nav.navbar-nav.navbar-right
               if user
                 li
                   a(href='/user/stats')= user.name
                 li
                   a(href='/logout') Log Out
+                  if user.is_admin
+                    li
+                      a(href='/admin') Admin
               else
                 li
                   a(href='/auth/twitter') Log In
       block content
-    div(id='footer')
-      div(class='container')
-        p(class='text-muted credit')!= title + ' &copy; ' + authors
+    div#footer
+      div.container
+        p.text-muted.credit!= title + ' &copy; ' + authors
     script(src='/javascripts/bootstrap.min.js')
