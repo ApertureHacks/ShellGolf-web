@@ -1,11 +1,32 @@
 extends layout
 
 block content
-  div.jumbotron
-    div.container
-      h1 Fore > /dev/null
-      p Welcome to Shell Golf, an interactive, competitive tutorial for learning
-        | how to leverage the power of the UNIX shell to do your bidding.
   div.container
     div.row
+      div.col-lg-8
+        div.panel.panel-primary
+          div.panel-heading
+            h1.panel-title Challenges
+          ul.list-group
+            li.list-group-item List
+            li.list-group-item of
+            li.list-group-item challenges
+            li.list-group-item here
       div.col-lg-4
+          div.row
+            div.panel.panel-default
+              div.panel-heading Leaderboard
+              if leaders
+                - var tbl_row = 0
+                table.table
+                  each leader in leaders
+                    - tbl_row++
+                    tr
+                      td= tbl_row
+                      td= leader.name
+              else
+                div.panel-body.
+                  Oops, looks like there aren't any leaders yet :(. You should
+                  go do a challenge and be the first one!
+        div.row
+          include includes/twitter-widget.html
