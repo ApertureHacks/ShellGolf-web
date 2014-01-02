@@ -10,7 +10,7 @@ exports.index = function(req, res){
 
   db.Course.find({}, function(err, courses){
     if (err) {
-      res.send("Error connecting to database.");
+      res.send('Error connecting to database.');
     }
     res.render('index', { title: 'Shell Golf',
                           user: req.user,

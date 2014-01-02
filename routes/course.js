@@ -9,7 +9,7 @@ exports.course = function(req, res){
 
   Course.findOne({numeric_id: numeric_id}, function(err, course){
     if (err) {
-      res.send("Error connecting to database.");
+      res.send('Error connecting to database.');
     }
     res.render('course', { title: 'Shell Golf',
                            user: req.user,
