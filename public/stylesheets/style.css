@@ -8,3 +8,11 @@
 textarea#commands {
   font-family: terminus;
 }
+
+img.user-thumbnail {
+  height: 25px;
+  width:  25px;
+  border-radius: 3px;
+  margin-bottom: -9px;
+  margin-top: -8px;
+}

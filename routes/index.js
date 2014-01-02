@@ -12,8 +12,9 @@ exports.index = function(req, res){
     if (err) {
       res.send('Error connecting to database.');
     }
-    res.render('index', { title: 'Shell Golf',
-                          user: req.user,
-                          courses: courses});
+    res.render('index', { title: 'Shell Golf'
+                        , user: req.user
+                        , courses: courses
+    });
   });
 };

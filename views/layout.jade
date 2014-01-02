@@ -1,4 +1,8 @@
-doctype 5
+doctype html
+
+mixin navLink(href, text)
+    a(class!=attributes.class + ' tooltipped', href=href, data-original-title=text, data-placement='bottom', data-container='div.navbar')
+
 html
   head
     title= title
@@ -16,17 +20,20 @@ html
             ul.nav.navbar-nav.navbar-right
               if user
                 li
-                  a(href='/user/stats')= user.name
+                  a(href='/user/stats')
+                    img.user-thumbnail(src=user.image)
                 li
-                  a(href='/logout') Log Out
+                  +navLink('/logout', 'Log Out').glyphicon.glyphicon-log-out
                   if user.is_admin
                     li
-                      a(href='/admin') Admin
+                      +navLink('/admin', 'Admin').glyphicon.glyphicon-cog
               else
                 li
+                  //- +navLink('/auth/twitter', 'Log In').glyphicon.glyphicon-log-in
                   a(href='/auth/twitter') Log In
       block content
     div#footer
       div.container
         p.text-muted.credit!= title + ' &copy; ' + authors
     script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/sg-global.js')
