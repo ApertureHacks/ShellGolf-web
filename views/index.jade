@@ -1,32 +1,33 @@
 extends layout
 
 block content
-  div.container
-    div.row
-      div.col-lg-8
-        div.panel.panel-primary
-          div.panel-heading
-            h1.panel-title Challenges
-          ul.list-group
-            li.list-group-item List
-            li.list-group-item of
-            li.list-group-item challenges
-            li.list-group-item here
-      div.col-lg-4
-          div.row
-            div.panel.panel-default
-              div.panel-heading Leaderboard
-              if leaders
-                - var tbl_row = 0
-                table.table
-                  each leader in leaders
-                    - tbl_row++
-                    tr
-                      td= tbl_row
-                      td= leader.name
-              else
-                div.panel-body.
-                  Oops, looks like there aren't any leaders yet :(. You should
-                  go do a challenge and be the first one!
-        div.row
+  div.row
+    div.col-md-8
+      div.panel.panel-primary
+        div.panel-heading
+          h1.panel-title Challenges
+        ul.list-group
+          li.list-group-item List
+          li.list-group-item of
+          li.list-group-item challenges
+          li.list-group-item here
+    div.col-md-4
+      div.row
+        div.col-md-12
+          div.panel.panel-default
+            div.panel-heading Leaderboard
+            if leaders
+              - var tbl_row = 0
+              table.table
+                each leader in leaders
+                  - tbl_row++
+                  tr
+                    td= tbl_row
+                    td= leader.name
+            else
+              div.panel-body.
+                Oops, looks like there aren't any leaders yet :(. You should
+                go do a challenge and be the first one!
+      div.row
+        div.col-md-12
           include includes/twitter-widget.html

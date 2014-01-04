@@ -16,3 +16,7 @@ img.user-thumbnail {
   margin-bottom: -9px;
   margin-top: -8px;
 }
+
+div.alert,button.flash-close {
+  margin-top: -2px;
+}

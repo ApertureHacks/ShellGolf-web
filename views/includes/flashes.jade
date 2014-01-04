@@ -1,0 +1,15 @@
+if errors && errors.length > 0
+  each error in errors
+    div.row
+      div.col-lg-12
+        div.alert.alert-danger
+          button.close.flash-close(type="button" aria-hidden="true") &times;
+          = error
+
+if warnings && warnings.length > 0
+  each warning in warnings
+    div.row
+      div.col-lg-12
+        div.alert.alert-warning
+          button.close.flash-close(type="button" aria-hidden="true") &times;
+          = warning

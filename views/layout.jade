@@ -12,7 +12,7 @@ html
     script(src='//code.jquery.com/jquery.js')
   body
     div#wrap
-      div.navbar.navbar-default.navbar-fixed-top
+      div.navbar.navbar-default
         div.container
           div.navbar-header
             a.navbar-brand(href='/')= title
@@ -31,7 +31,9 @@ html
                 li
                   //- +navLink('/auth/twitter', 'Log In').glyphicon.glyphicon-log-in
                   a(href='/auth/twitter') Log In
-      block content
+      div.container
+        include includes/flashes.jade
+        block content
     div#footer
       div.container
         p.text-muted.credit!= title + ' &copy; ' + authors

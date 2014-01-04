@@ -5,6 +5,7 @@
 
 var express = require('express')
   , path = require('path')
+  , flash = require('connect-flash')
   , http = require('http');
 
 var config = require('./config')
@@ -28,6 +29,7 @@ app.use(express.cookieParser());
 app.use(express.session({ secret: config.session_secret }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(app.router);
 
 // development only
