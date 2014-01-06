@@ -10,8 +10,11 @@ var express = require('express')
 
 var config = require('./config')
   , db = require('./lib/db')
-  , passport = require('./lib/passport.js')
-  , logger = require('./lib/logger.js')
+  , passport = require('./lib/passport')
+  , logger = require('./lib/logger')
+  , requireLogin =  require('./lib/helpers').requireLogin
+  , requireAdmin =  require('./lib/helpers').requireAdmin
+  , requireAuthor = require('./lib/helpers').requireAuthor
   , routes = require('./routes');
 
 var app = express();

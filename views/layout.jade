@@ -27,6 +27,9 @@ html
                   if user.is_admin
                     li
                       +navLink('/admin', 'Admin').glyphicon.glyphicon-cog
+                  if user.is_author
+                    li
+                      +navLink('/challenge/create', 'New Challenge').glyphicon.glyphicon-edit
               else
                 li
                   //- +navLink('/auth/twitter', 'Log In').glyphicon.glyphicon-log-in
