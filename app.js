@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , path = require('path')
   , flash = require('connect-flash')
@@ -19,11 +14,13 @@ var config = require('./config')
 
 var app = express();
 
-// all environments
+// Configure app
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.favicon());
+
+// Define middleware
+app.use(express.favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(express.logger(logger.dev));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -35,15 +32,19 @@ app.use(passport.session());
 app.use(flash());
 app.use(app.router);
 
-// development only
+// development only middleware
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
 app.get('/', routes.index);
+
+// challenge routes
 app.get('/challenge/:id_number', routes.challenge.challenge);
 app.post('/challenge/:id_number/submit', routes.challenge.submit);
 
+// passport auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback',
     passport.authenticate('twitter', { successRedirect: '/',
@@ -52,6 +53,7 @@ app.get('/logout', function(req, res){
     req.logout();
     res.redirect('/');
 });
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
