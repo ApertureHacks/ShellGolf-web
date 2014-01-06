@@ -38,8 +38,8 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/course/:id_number', routes.course.course);
-app.post('/course/:id_number/submit', routes.course.submit);
+app.get('/challenge/:id_number', routes.challenge.challenge);
+app.post('/challenge/:id_number/submit', routes.challenge.submit);
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback',

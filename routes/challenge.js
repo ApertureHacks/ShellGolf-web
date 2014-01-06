@@ -1,18 +1,15 @@
-// GET courses
-
 var zmq = require('../lib/zmq_client')
   , mkparams = require('../lib/helpers').mkparams
   , db = require('../lib/db');
 
-exports.course = function(req, res){
+exports.challenge = function(req, res){
   var numeric_id = req.params[0];
-  var Course = mongoose.model('Course', CourseSchema);
 
-  Course.findOne({numeric_id: numeric_id}, function(err, course){
+  db.Challenge.findOne({numeric_id: numeric_id}, function(err, challenge){
     if (err) {
       res.send('Error connecting to database.');
     }
-    res.render('course', mkparams(req, {course: course}));
+    res.render('challenge', mkparams(req, {challenge: challenge}));
   });
 };
 
