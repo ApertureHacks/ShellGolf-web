@@ -20,3 +20,14 @@ img.user-thumbnail {
 div.alert,button.flash-close {
   margin-top: -2px;
 }
+
+/* Create challenge CSS
+-------------------------------------------------- */
+textarea.file-contents {
+  resize: none;
+  width: 100%;
+  min-height: 150px;
+  box-sizing:          border-box;
+  -moz-box-sizing:     border-box;
+  -webkit-box-sizing:  border-box;
+}
