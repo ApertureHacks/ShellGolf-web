@@ -1,6 +1,7 @@
 // GET courses
 
 var zmq = require('../lib/zmq_client')
+  , mkparams = require('../lib/helpers').mkparams
   , db = require('../lib/db');
 
 exports.course = function(req, res){
@@ -11,9 +12,7 @@ exports.course = function(req, res){
     if (err) {
       res.send('Error connecting to database.');
     }
-    res.render('course', { title: 'Shell Golf',
-                           user: req.user,
-                           course: course});
+    res.render('course', mkparams(req, {course: course}));
   });
 };
 
