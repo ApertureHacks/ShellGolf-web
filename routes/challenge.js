@@ -84,3 +84,7 @@ exports.submit = function(req, res){
     }, 30000);
   });
 };
+
+exports.create = function(req, res){
+  res.render('challenge/create', mkparams(req));
+};

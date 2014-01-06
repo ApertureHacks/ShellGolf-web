@@ -53,6 +53,7 @@ app.get('/', routes.index);
 // challenge routes
 app.get('/challenge/:id', routes.challenge.challenge);
 app.post('/challenge/:id/submit', requireLogin, useWorker, routes.challenge.submit);
+app.get('/challenge/create', requireAuthor, routes.challenge.create);
 
 // passport auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
