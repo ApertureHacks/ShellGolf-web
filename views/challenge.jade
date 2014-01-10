@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  div.row
+    div.col-md-12
+      h3= challenge.name
+      p= challenge.instructions
+  hr
+  div.row
+    div.col-md-8
+      h3(style="margin-top:0;") Input Commands
+      form(role="form")
+        div.form-group
+          textarea.form-control#commands(rows="8")
+      button.btn.btn-primary#submit_code Submit
+    div.col-md-4
+      div.panel-group#states-accordion
+        div.panel.panel-info
+          div.panel-heading
+            h4.panel-title
+              a(data-toggle='collapse', data-parent='#states-accordion', href='#collapseBefore') Before
+          div.panel-collapse.collapse.in#collapseBefore
+            div.panel-body
+              +dirStructure(challenge.start)
+        div.panel.panel-success
+          div.panel-heading
+            h4.panel-title
+              a(data-toggle='collapse', data-parent='#states-accordion', href='#collapseAfter') After
+          div.panel-collapse.collapse#collapseAfter
+            div.panel-body
+              +dirStructure(challenge.end)
+  script(src="/javascripts/sg-challenge.js")
+
+
+mixin dirStructure(dir)
+  pre
+    | .
+    +subDir(dir, 0)
+
+// contain the ugly stuff in here o_O
+mixin dirRow(name, spaces, end)
+  // need this here because jade has wacky scoping
+  - String.prototype.repeat = function(num){return new Array(num + 1).join(this);}
+  - var boxStr = end ? '└── ' : '├── '
+
+  = '\n' + ' '.repeat(spaces) + boxStr + name
+
+mixin subDir(dir, spaces)
+  - var i
+
+  if dir.files.length > 0
+    - for(i = 0; i < dir.files.length - 1; i++)
+      +dirRow(dir.files[i].name, spaces, false)
+    if dir.subdirs.length > 0
+      +dirRow(dir.files[i].name, spaces, false)
+    else
+      +dirRow(dir.files[i].name, spaces, true)
+  if dir.subdirs.length > 0
+    - for(i = 0; i < dir.subdirs.length - 1; i++)
+      +dirRow(dir.subdirs[i].name, spaces, false)
+      +subDir(dir.subdirs[0], spaces + 4)
+    +dirRow(dir.subdirs[i].name, spaces, true)
+    +subDir(dir.subdirs[0], spaces + 4)
+

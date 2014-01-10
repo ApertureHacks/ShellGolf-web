@@ -1,5 +1,6 @@
 var zmq = require('../lib/zmq_client')
   , mkparams = require('../lib/helpers').mkparams
+  , ObjectId = require('mongoose').Types.ObjectId
   , db = require('../lib/db');
 
 exports.challenge = function(req, res){
@@ -9,12 +10,14 @@ exports.challenge = function(req, res){
     id = new ObjectId(req.params.id);
   } catch(err) {
     // if we didn't get a valid id, just say the challenge wasn't found
-    return res.render('challenge', mkparams(req, {challenge: null}));
+    req.flash('errors', 'That challenge doesn\'t appear to exist...');
+    return res.redirect('/');
   }
 
   db.Challenge.findOne({_id: id}, function(err, challenge){
     if (err) {
-      return res.send('Error connecting to database.');
+      req.flash('errors', 'Error connecting to database.');
+      return res.redirect('/');
     }
     res.render('challenge', {challenge: challenge});
   });

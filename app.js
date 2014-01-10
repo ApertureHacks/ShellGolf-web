@@ -50,7 +50,7 @@ app.locals({ title: config.title || 'Shell Golf' });
 app.get('/', routes.index);
 
 // challenge routes
-app.get('/challenge/:id_number', routes.challenge.challenge);
+app.get('/challenge/:id', routes.challenge.challenge);
 app.post('/challenge/:id_number/submit', routes.challenge.submit);
 
 // passport auth routes

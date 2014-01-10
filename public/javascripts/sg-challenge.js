@@ -32,3 +32,10 @@ $("#submit_code").click(function(btn){
     }
   });
 });
+
+// Make sure that either the before or after pane is always open
+$('.panel-heading a').on('click',function(e){
+    if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
+        e.stopPropagation();
+    }
+});
