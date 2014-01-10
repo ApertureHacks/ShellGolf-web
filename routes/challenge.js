@@ -3,11 +3,18 @@ var zmq = require('../lib/zmq_client')
   , db = require('../lib/db');
 
 exports.challenge = function(req, res){
-  var numeric_id = req.params[0];
+  var id;
 
-  db.Challenge.findOne({numeric_id: numeric_id}, function(err, challenge){
+  try {
+    id = new ObjectId(req.params.id);
+  } catch(err) {
+    // if we didn't get a valid id, just say the challenge wasn't found
+    return res.render('challenge', mkparams(req, {challenge: null}));
+  }
+
+  db.Challenge.findOne({_id: id}, function(err, challenge){
     if (err) {
-      res.send('Error connecting to database.');
+      return res.send('Error connecting to database.');
     }
     res.render('challenge', {challenge: challenge});
   });
