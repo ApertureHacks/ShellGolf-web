@@ -8,5 +8,10 @@ exports.challenge = require('./challenge');
 var db = require('../lib/db');
 
 exports.index = function(req, res){
-  res.render('index');
+  db.Challenge.find().limit(10).exec(function(error, challenges) {
+    if (error) {
+      return res.send('Error connecting to database.');
+    }
+    res.render('index', {challenges: challenges});
+  });
 };

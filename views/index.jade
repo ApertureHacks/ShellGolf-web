@@ -7,10 +7,9 @@ block content
         div.panel-heading
           h1.panel-title Challenges
         ul.list-group
-          li.list-group-item List
-          li.list-group-item of
-          li.list-group-item challenges
-          li.list-group-item here
+          each challenge in challenges
+            li.list-group-item
+              a(href='/challenge/' + challenge._id.toString())= challenge.name
     div.col-md-4
       div.row
         div.col-md-12

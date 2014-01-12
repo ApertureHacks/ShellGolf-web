@@ -1,6 +1,7 @@
 var zmq = require('../lib/zmq_client')
   , mkparams = require('../lib/helpers').mkparams
   , ObjectId = require('mongoose').Types.ObjectId
+  , uuid = require('uuid').v4
   , db = require('../lib/db');
 
 exports.challenge = function(req, res){
@@ -24,16 +25,31 @@ exports.challenge = function(req, res){
 };
 
 exports.submit = function(req, res){
-  var numeric_id = req.params.id_number;
+  var id = req.params.id;
   var commands = req.body.commands;
+  var task_uuid = uuid();
+  var timeout;
 
-  // Replace newlines with semicolons
-  commands = commands.replace('\n', '; ');
-  zmq.zmq_client(req.user.uid, numeric_id, commands, function(result){
-    console.log("Got result: " + result.toString());
-    // res.contentType('json');
-    res.write('{"success": ' + result.toString() + '}');
+  var listener = function() {
+    clearTimeout(timeout);
+    res.write('{"success": true}');
     res.end();
-  });
-  // FIXME: store the result somewhere
+  };
+
+  req.workerResponse.once(task_uuid, listener);
+
+  //FIXME: Iron worker stuff
+
+  console.log('settting timeout');
+  timeout = setTimeout(function() {
+    console.log('timeout triggered');
+    req.workerResponse.removeAllListeners(task_uuid);
+    res.write('{"success": false}');
+    res.end();
+  }, 3000);
+};
+
+exports.response = function(req, res) {
+  var task_uuid = req.params.uuid;
+  req.workerResponse.emit(task_uuid);
 };

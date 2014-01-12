@@ -10,6 +10,7 @@ var config = require('./config')
   , requireLogin =  require('./lib/helpers').requireLogin
   , requireAdmin =  require('./lib/helpers').requireAdmin
   , requireAuthor = require('./lib/helpers').requireAuthor
+  , useWorker = require('./lib/workerResponse').useWorker
   , routes = require('./routes');
 
 var app = express();
@@ -51,7 +52,8 @@ app.get('/', routes.index);
 
 // challenge routes
 app.get('/challenge/:id', routes.challenge.challenge);
-app.post('/challenge/:id_number/submit', routes.challenge.submit);
+app.post('/challenge/:id/submit', requireLogin, useWorker, routes.challenge.submit);
+app.post('/challenge/response/:uuid', useWorker, routes.challenge.response);
 
 // passport auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
