@@ -1,5 +1,4 @@
-var zmq = require('../lib/zmq_client')
-  , mkparams = require('../lib/helpers').mkparams
+var mkparams = require('../lib/helpers').mkparams
   , ObjectId = require('mongoose').Types.ObjectId
   , uuid = require('uuid').v4
   , db = require('../lib/db');
