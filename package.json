@@ -6,11 +6,13 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "amqp": "~0.1.8",
     "bytes": "0.x",
     "connect-flash": "0.x",
     "express": "3.x",
     "jade": "1.x",
     "mongoose": "3.x",
+    "node-ironio": "~0.4.0",
     "passport": "0.x",
     "passport-twitter": "1.x",
     "uuid": "~1.4.1"
