@@ -37,6 +37,15 @@ if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// values we want in every template
+app.locals({ title: config.title || 'Shell Golf' });
+
+app.use(function(req, res, next) {
+  res.locals({ user: req.user
+             , warnings: req.flash('warnings')
+             , errors: req.flash('errors') });
+  next();
+});
 
 app.get('/', routes.index);
 

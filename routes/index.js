@@ -8,5 +8,5 @@ exports.challenge = require('./challenge');
 var db = require('../lib/db');
 
 exports.index = function(req, res){
-  res.render('index', mkparams(req));
+  res.render('index');
 };

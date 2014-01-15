@@ -9,7 +9,7 @@ exports.challenge = function(req, res){
     if (err) {
       res.send('Error connecting to database.');
     }
-    res.render('challenge', mkparams(req, {challenge: challenge}));
+    res.render('challenge', {challenge: challenge});
   });
 };
 
