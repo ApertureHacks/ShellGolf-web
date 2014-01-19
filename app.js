@@ -30,6 +30,13 @@ app.use(express.session({ secret: config.session_secret }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(function(req, res, next) {
+  res.locals({ user: req.user
+             , warnings: req.flash('warnings')
+             , errors: req.flash('errors') });
+  next();
+});
+
 app.use(app.router);
 
 // development only middleware
@@ -39,13 +46,6 @@ if ('development' === app.get('env')) {
 
 // values we want in every template
 app.locals({ title: config.title || 'Shell Golf' });
-
-app.use(function(req, res, next) {
-  res.locals({ user: req.user
-             , warnings: req.flash('warnings')
-             , errors: req.flash('errors') });
-  next();
-});
 
 app.get('/', routes.index);
 
