@@ -86,5 +86,5 @@ exports.submit = function(req, res){
 };
 
 exports.create = function(req, res){
-  res.render('challenge/create', mkparams(req));
+  res.render('challenge/create');
 };

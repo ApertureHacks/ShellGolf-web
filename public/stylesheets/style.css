@@ -31,3 +31,11 @@ textarea.file-contents {
   -moz-box-sizing:     border-box;
   -webkit-box-sizing:  border-box;
 }
+
+input.challenge-title {
+  font-size: 24pt;
+}
+
+li.selected {
+  background-color: #BFBFBF;
+}

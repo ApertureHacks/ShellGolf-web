@@ -2,21 +2,28 @@ extends ../layout
 
 block content
   div.row
+    div.col-md-4
+      input.challenge-title(type=text)
+  br
+  div.row
     div.col-md-6
       div.panel.panel-info
         div.panel-heading Start
-      button.btn.btn-default Add +
+        ul.list-group#files-start
+      button.btn.btn-default#add-start Add +
     div.col-md-6
       div.panel.panel-success
         div.panel-heading End
-      button.btn.btn-default Add +
+        ul.list-group#files-end
+      button.btn.btn-default#add-end Add +
   hr
   div.row
     div.col-md-6
       div.panel.panel-info
         div.panel-heading File Contents
-        textarea.file-contents
+        textarea.file-contents#contents-start
     div.col-md-6
       div.panel.panel-success
         div.panel-heading File Contents
-        textarea.file-contents
+        textarea.file-contents#contents-end
+  script(src='/javascripts/sg-challenge-create.js')
