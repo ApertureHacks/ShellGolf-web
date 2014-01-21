@@ -88,3 +88,47 @@ exports.submit = function(req, res){
 exports.create = function(req, res){
   res.render('challenge/create');
 };
+
+exports.try_create = function(req, res) {
+  var newChallenge = req.body.challenge;
+  var requiredFields = ['title', 'start', 'end'];
+
+  for (var i = 0, len = requiredFields.length; i < len; i++) {
+    if (! newChallenge[requiredFields[i]]) {
+      res.write(JSON.stringify(
+          {
+            success: false
+          , error: 'Missing field: ' + requiredFields[i]
+          }
+      ));
+      return res.end();
+    }
+  }
+
+  db.Challenge.findOne({ title: newChallenge.title }).exec(function(err, challenge) {
+    if(err) {
+      return res.json({ success: false
+                      , error: 'Error connecting to database.' });
+    }
+
+    if (challenge) {
+      return res.json({ success: false
+                      , error: 'A chalenge with that title already exists.' });
+    }
+
+    // FIXME: still need description and instructions in here.
+    challenge = new db.Challenge();
+    // challenge.owner = req.user._id;
+    challenge.name = newChallenge.title;
+    challenge.start = newChallenge.start;
+    challenge.end = newChallenge.end;
+
+    challenge.save(function(err) {
+      if (err) {
+        return res.json({ success: false
+                        , err: err});
+      }
+      res.json({ success: true });
+    });
+  });
+};

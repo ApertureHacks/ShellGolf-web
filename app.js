@@ -53,6 +53,7 @@ app.get('/', routes.index);
 // challenge routes
 // app.get('/challenge/create', requireAuthor, routes.challenge.create);
 app.get('/challenge/create', routes.challenge.create);
+app.post('/challenge/create/submit', routes.challenge.try_create);
 app.get('/challenge/:id', routes.challenge.challenge);
 app.post('/challenge/:id/submit', requireLogin, useWorker, routes.challenge.submit);
 

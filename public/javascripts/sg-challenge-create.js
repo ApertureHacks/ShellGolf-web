@@ -8,6 +8,7 @@ function clearSelections($list, $box) {
         $this.data('name', $this.children('input').val());
         $this.html('<p>' + $this.data().name + '</p>');
         $this.data('contents', $box.val());
+        $box.val('');
       }
     }
     $this.removeClass('selected');
@@ -19,7 +20,7 @@ function createListeners(side) {
     var $list = $('#files-' + side);
     var $box = $('#contents-' + side);
     clearSelections($list, $box);
-    var $newFile = $('<li class="list-group-item selected"><input type=text class="form-control"></input></li>');
+    var $newFile = $('<li class="list-group-item file selected"><input type=text class="form-control"></input></li>');
     $list.append($newFile);
     $box.val('');
     $newFile.children('input').focus();
@@ -40,3 +41,46 @@ function createListeners(side) {
 
 createListeners('start');
 createListeners('end');
+
+$('#create-challenge').click(function() {
+  var start = { files: []
+              , subdirs: [] }
+    , end = { files: []
+            , subdirs: [] }
+    , challenge = { title: $('#title').val()
+                  , start: start
+                  , end: end};
+
+  clearSelections($('#files-start'), $('#contents-start'));
+  clearSelections($('#files-end'), $('#contents-end'));
+
+  $('#files-start').children('.file').each(function() {
+    $file = $(this).data();
+    start.files.push( { name: $file.name
+                      , contents: $file.contents } );
+  });
+
+  $('#files-end').children('.file').each(function() {
+    $file = $(this).data();
+    end.files.push( { name: $file.name
+                    , contents: $file.contents } );
+  });
+
+  console.log(challenge);
+  $.ajax({
+    type: 'POST',
+    url: window.location.pathname + "/submit",
+    data: {challenge: challenge},
+    success: function(data){
+      console.log(data);
+      if (data.success) {
+        alert('Successfully created challenge');
+      } else {
+        alert('Failed to created challenge');
+      }
+    },
+    error: function(xhr, status, error){
+      console.log("AJAX ERROR: " + error.message);
+    }
+  });
+});
