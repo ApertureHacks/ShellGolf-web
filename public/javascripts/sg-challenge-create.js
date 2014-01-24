@@ -48,6 +48,7 @@ $('#create-challenge').click(function() {
     , end = { files: []
             , subdirs: [] }
     , challenge = { title: $('#title').val()
+                  , description: $('#description').val()
                   , start: start
                   , end: end};
 

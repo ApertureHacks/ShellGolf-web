@@ -120,6 +120,7 @@ exports.try_create = function(req, res) {
     challenge = new db.Challenge();
     // challenge.owner = req.user._id;
     challenge.name = newChallenge.title;
+    challenge.description = newChallenge.description;
     challenge.start = newChallenge.start;
     challenge.end = newChallenge.end;
 

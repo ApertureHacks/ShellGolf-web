@@ -3,8 +3,10 @@ extends ../layout
 block content
   div.row
     div.col-md-4
-      input.challenge-title#title(type=text)
-    div.col-md-2.col-md-offset-6
+      input.challenge-title.form-control#title(type=text)
+    div.col-md-6
+      input.challenge-description.form-control#description(type=text)
+    div.col-md-2
       button.btn.btn-status#create-challenge(style='float: right;') Create
   br
   div.row
