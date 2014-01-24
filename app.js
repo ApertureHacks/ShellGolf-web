@@ -4,7 +4,6 @@ var express = require('express')
   , http = require('http');
 
 var config = require('./config')
-  , db = require('./lib/db')
   , passport = require('./lib/passport')
   , logger = require('./lib/logger')
   , requireLogin =  require('./lib/helpers').requireLogin
