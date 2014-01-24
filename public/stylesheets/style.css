@@ -32,8 +32,16 @@ textarea.file-contents {
   -webkit-box-sizing:  border-box;
 }
 
-input.challenge-title {
-  font-size: 24pt;
+/*
+ * input.challenge-title {
+ *   font-size: 24pt;
+ *   height: 24px;
+ * }
+ */
+
+ul.list-files {
+  max-height: 200px;
+  overflow: auto;
 }
 
 li.selected {
