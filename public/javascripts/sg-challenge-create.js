@@ -47,8 +47,9 @@ $('#create-challenge').click(function() {
     , end = []
     , challenge = { title: $('#title').val()
                   , description: $('#description').val()
+                  , instructions: $('#instructions').val()
                   , start: start
-                  , end: end};
+                  , end: end };
 
   clearSelections($('#files-start'), $('#contents-start'));
   clearSelections($('#files-end'), $('#contents-end'));

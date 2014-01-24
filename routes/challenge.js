@@ -69,6 +69,7 @@ exports.try_create = function(req, res) {
     // challenge.owner = req.user._id;
     challenge.name = newChallenge.title;
     challenge.description = newChallenge.description;
+    challenge.instructions = newChallenge.instructions;
     challenge.start = newChallenge.start;
     challenge.end = newChallenge.end;
 

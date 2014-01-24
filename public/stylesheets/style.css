@@ -23,6 +23,7 @@ div.alert,button.flash-close {
 
 /* Create challenge CSS
 -------------------------------------------------- */
+textarea.challenge-instructions,
 textarea.file-contents {
   resize: none;
   width: 100%;

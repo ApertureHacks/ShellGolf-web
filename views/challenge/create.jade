@@ -3,11 +3,15 @@ extends ../layout
 block content
   div.row
     div.col-md-4
-      input.challenge-title.form-control#title(type=text)
+      input.challenge-title.form-control#title(type=text, placeholder='Title')
     div.col-md-6
-      input.challenge-description.form-control#description(type=text)
+      input.challenge-description.form-control#description(type=text, placeholder='Short description.')
     div.col-md-2
       button.btn.btn-status#create-challenge(style='float: right;') Create
+  br
+  div.row
+    div.col-md-10
+      textarea.challenge-instructions.form-control#instructions(placeholder='Full challenge instructions.')
   br
   div.row
     div.col-md-6
