@@ -4,13 +4,13 @@ var mkparams = require('../lib/helpers').mkparams
   , queue = require('../lib/queue')
   , db = require('../lib/db');
 
-exports.challenge = function(req, res){
+var challenge = module.exports = function(req, res){
   getChallenge(req, res, req.params.id, function(challenge) {
     res.render('challenge', {challenge: challenge});
   });
 };
 
-exports.submit = function(req, res){
+challenge.submit = function(req, res){
   var id = req.params.id;
   var commands = req.body.commands;
   var timeout;
@@ -33,11 +33,11 @@ exports.submit = function(req, res){
   });
 };
 
-exports.create = function(req, res){
+challenge.create = function(req, res){
   res.render('challenge/create');
 };
 
-exports.try_create = function(req, res) {
+challenge.create.submit = function(req, res) {
   var newChallenge = req.body.challenge;
   var requiredFields = ['title', 'start', 'end'];
 
@@ -82,6 +82,7 @@ exports.try_create = function(req, res) {
     });
   });
 };
+
 
 // Helper function to get a challenge and handle any errors
 function getChallenge(req, res, challengeId, callback) {
