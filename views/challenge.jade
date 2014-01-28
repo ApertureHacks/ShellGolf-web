@@ -48,17 +48,10 @@ mixin dirRow(name, spaces, end)
 mixin subDir(dir, spaces)
   - var i
 
-  if dir.files && dir.files.length > 0
-    - for(i = 0; i < dir.files.length - 1; i++)
-      +dirRow(dir.files[i].name, spaces, false)
+  if dir && dir.length > 0
+    - for(i = 0; i < dir.length - 1; i++)
+      +dirRow(dir[i].name, spaces, false)
     if dir.subdirs && dir.subdirs.length > 0
-      +dirRow(dir.files[i].name, spaces, false)
+      +dirRow(dir[i].name, spaces, false)
     else
-      +dirRow(dir.files[i].name, spaces, true)
-  if dir.subdirs && dir.subdirs.length > 0
-    - for(i = 0; i < dir.subdirs.length - 1; i++)
-      +dirRow(dir.subdirs[i].name, spaces, false)
-      +subDir(dir.subdirs[0], spaces + 4)
-    +dirRow(dir.subdirs[i].name, spaces, true)
-    +subDir(dir.subdirs[0], spaces + 4)
-
+      +dirRow(dir[i].name, spaces, true)

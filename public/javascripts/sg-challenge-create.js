@@ -43,10 +43,8 @@ createListeners('start');
 createListeners('end');
 
 $('#create-challenge').click(function() {
-  var start = { files: []
-              , subdirs: [] }
-    , end = { files: []
-            , subdirs: [] }
+  var start = []
+    , end = []
     , challenge = { title: $('#title').val()
                   , description: $('#description').val()
                   , start: start
@@ -57,13 +55,13 @@ $('#create-challenge').click(function() {
 
   $('#files-start').children('.file').each(function() {
     $file = $(this).data();
-    start.files.push( { name: $file.name
+    start.push( { name: $file.name
                       , contents: $file.contents } );
   });
 
   $('#files-end').children('.file').each(function() {
     $file = $(this).data();
-    end.files.push( { name: $file.name
+    end.push( { name: $file.name
                     , contents: $file.contents } );
   });
 
