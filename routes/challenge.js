@@ -107,3 +107,54 @@ function getChallenge(req, res, challengeId, callback) {
     callback(challenge);
   });
 }
+
+/*
+ * Function to calculate the score for a solution
+ * Adds number of characters (w/o most white space)
+ * to mulitple of number of words.
+ * @method scoreChallenge
+ * @param {String} solution
+ * @return {int} score
+ */
+function scoreChallenge(solution) {
+  var score = 0;
+  //String without most whitespace
+  var stripped = solution.replace(/[ \t\v]/g, '');
+
+  score += stripped.length;
+
+  //Calculating words is more difficult
+  var word_count = 0;
+  var in_word = false;
+
+  for(var i = 0; i < solution.length; ++i) {
+    var ch = solution.charAt(i);
+    //if we do not have characters that do not form words
+    if(!(/[\s\(\)\;]/.test(ch))) {
+      in_word = true;
+      if(ch === '"') { //Double quote, not escaped
+        ++word_count;
+        i = solution.indexOf('"', i+1);
+        in_word = false;
+      } else if(ch === '\'') { //single quote, not escaped
+        ++word_count;
+        i = solution.indexOf('\'', i+1);
+        in_word = false;
+      } else if(ch === '\\') { //escape character, skip next
+        ++i;
+      }
+    } else {
+      if(in_word) {
+        ++word_count;
+        in_word = false;
+      }
+    }
+  }
+
+  if(in_word) ++word_count;
+
+  score += 3*word_count;
+
+  return score;
+
+}
