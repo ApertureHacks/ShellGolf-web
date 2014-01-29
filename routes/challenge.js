@@ -16,10 +16,9 @@ challenge.submit = function(req, res){
   var timeout;
 
   getChallenge(req, res, id, function(challenge){
-    var listener = function() {
+    var listener = function(msg) {
       clearTimeout(timeout);
-      res.write('{"success": true}');
-      res.end();
+      res.send({ success: msg.result });
     };
 
     queue.challenge(challenge._id, commands, listener);

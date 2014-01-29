@@ -13,8 +13,6 @@ $("#submit_code").click(function(btn){
     url: window.location.pathname + "/submit",
     data: { commands: commands },
     success: function(data){
-      console.log(data);
-      data = JSON.parse(data);
       if (data.success) {
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
