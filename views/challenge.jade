@@ -11,8 +11,12 @@ block content
       h3(style="margin-top:0;") Input Commands
       form(role="form")
         div.form-group
-          textarea.form-control#commands(rows="8")
-      button.btn.btn-primary#submit_code Submit
+          if user
+            textarea.form-control#commands(rows="8")
+            button.btn.btn-primary#submit_code(style='margin-top: 15px;') Submit
+          else
+            textarea.form-control#commands(rows="8", disabled='disabled')
+            button.btn.btn-primary#submit_code(disabled='disabled') Log in to Submit
     div.col-md-4
       div.panel-group#states-accordion
         div.panel.panel-info

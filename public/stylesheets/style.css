@@ -9,6 +9,10 @@ textarea#commands {
   font-family: terminus;
 }
 
+button#submit_code {
+  margin-top: 15px;
+}
+
 img.user-thumbnail {
   height: 25px;
   width:  25px;
