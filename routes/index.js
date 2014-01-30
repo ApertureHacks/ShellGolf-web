@@ -1,5 +1,3 @@
-var mkparams = require('../lib/helpers').mkparams;
-
 // Include other routes
 exports.user = require('./user');
 exports.challenge = require('./challenge');

@@ -1,5 +1,4 @@
-var mkparams = require('../lib/helpers').mkparams
-  , ObjectId = require('mongoose').Types.ObjectId
+var ObjectId = require('mongoose').Types.ObjectId
   , config = require('../config')
   , queue = require('../lib/queue')
   , db = require('../lib/db');
