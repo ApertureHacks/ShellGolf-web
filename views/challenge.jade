@@ -33,6 +33,13 @@ block content
           div.panel-collapse.collapse#collapseAfter
             div.panel-body
               +dirStructure(challenge.end)
+        div.panel.panel-warning#panel-output(style='display: none;')
+          div.panel-heading
+            h4.panel-title
+              a.collapse-title(data-toggle='collapse', data-parent='#states-accordion', href='#collapse-output') Output
+          div.panel-collapse.collapse#collapse-output
+            div.panel-body
+              pre#pre-output
   script(src="/javascripts/sg-challenge.js")
 
 

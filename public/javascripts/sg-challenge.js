@@ -13,6 +13,7 @@ $("#submit_code").click(function(btn){
     url: window.location.pathname + "/submit",
     data: { commands: commands },
     success: function(data){
+      showOutput(data.output);
       if (data.success) {
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
@@ -37,3 +38,15 @@ $('.panel-heading a').on('click',function(e){
         e.stopPropagation();
     }
 });
+
+
+/**
+ *  Appends the output of an executed command to the accordion.
+ *
+ *  @method showOutput
+ *  @param {String} output Output returned from the server.
+ */
+function showOutput(output) {
+  $('#pre-output').html(output);
+  $('#panel-output').removeAttr('style');
+}
