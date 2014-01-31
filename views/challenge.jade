@@ -43,6 +43,13 @@ block content
           div.panel-collapse.collapse#collapse-output
             div.panel-body
               pre#pre-output
+        div.panel.panel-primary#panel-score(style='display: none;')
+          div.panel-heading
+            h4.panel-title
+              a.collapse-title(data-toggle='collapse', data-parent='#states-accordion', href='#collapse-score') Score
+          div.panel-collapse.collapse#collapse-score
+            div.panel-body
+              p#score
   script(src="/javascripts/sg-challenge.js")
 
 

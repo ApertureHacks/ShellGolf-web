@@ -17,7 +17,12 @@ challenge.submit = function(req, res){
   getChallenge(req, res, id, function(challenge){
     var listener = function(msg) {
       clearTimeout(timeout);
+      var score;
+      if (msg.result) {
+        score = scoreChallenge(commands);
+      }
       res.send({ success: msg.result
+               , score: score
                , output: msg.output });
     };
 

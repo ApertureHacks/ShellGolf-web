@@ -1,8 +1,6 @@
 $("#submit_code").click(function(btn){
   $btn = $(this);
   $commands_field = $("#commands");
-  $stats_sidebar = $('#stats_sidebar');
-  $sidebar_info = $('#sidebar_info');
 
   $btn.removeClass("btn-default");
   $btn.addClass("btn-info");
@@ -17,11 +15,9 @@ $("#submit_code").click(function(btn){
       if (data.success) {
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
+        showScore(data.score);
         $btn.removeClass("btn-info");
         $btn.addClass("btn-success");
-        $stats_sidebar.text("Success");
-        $sidebar_info.text("Number of chars: " + strlen +
-                           "\nNumber of commands: " + cmds + "\nResult: Par");
       } else {
         $btn.removeClass("btn-info");
         $btn.addClass("btn-warning");
@@ -54,4 +50,15 @@ function showContents(name, contents) {
 function showOutput(output) {
   $('#pre-output').html(output);
   $('#panel-output').removeAttr('style');
+}
+
+/**
+ *  Appends the score returned from the server to the accordion.
+ *
+ *  @method showScore
+ *  @param score Score returned from the server.
+ */
+function showScore(score) {
+  $('#score').html('Success!<br />Score: ' + score);
+  $('#panel-score').removeAttr('style');
 }
