@@ -16,10 +16,11 @@ $("#submit_code").click(function(btn){
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
         showScore(data.score);
-        $btn.removeClass("btn-info");
+        $btn.removeClass("btn-info btn-warning");
         $btn.addClass("btn-success");
       } else {
-        $btn.removeClass("btn-info");
+        $('#panel-score').attr('style', 'display: none;');
+        $btn.removeClass("btn-info btn-success");
         $btn.addClass("btn-warning");
       }},
     error: function(xhr, status, error){
