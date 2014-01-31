@@ -11,11 +11,15 @@ block content
       h3(style="margin-top:0;") Input Commands
       div.form-group
         if user
-          textarea.form-control#commands(rows="8")
+          textarea.form-control.terminal_font#commands(rows="8")
           button.btn.btn-primary#submit_code(style='margin-top: 15px;') Submit
         else
           textarea.form-control#commands(rows="8", disabled='disabled')
           button.btn.btn-primary#submit_code(disabled='disabled') Log in to Submit
+      div#contents_area
+        h3#filename_heading File Contents:
+        div.form-group
+          textarea.form-control.terminal_font#file_contents(rows="8")
     div.col-md-4
       div.panel-group#states-accordion
         div.panel.panel-info
@@ -48,20 +52,21 @@ mixin dirStructure(dir)
     +subDir(dir, 0)
 
 // contain the ugly stuff in here o_O
-mixin dirRow(name, spaces, end)
+mixin dirRow(name, contents, spaces, end)
+  - var anchor = '<a onclick="showContents(\'' + name + '\', \'' + contents + '\')">'
   // need this here because jade has wacky scoping
   - String.prototype.repeat = function(num){return new Array(num + 1).join(this);}
   - var boxStr = end ? '└── ' : '├── '
 
-  = '\n' + ' '.repeat(spaces) + boxStr + name
+  != '\n' + ' '.repeat(spaces) + boxStr + anchor + name + '</a>'
 
 mixin subDir(dir, spaces)
   - var i
 
   if dir && dir.length > 0
     - for(i = 0; i < dir.length - 1; i++)
-      +dirRow(dir[i].name, spaces, false)
+      +dirRow(dir[i].name, dir[i].contents, spaces, false)
     if dir.subdirs && dir.subdirs.length > 0
-      +dirRow(dir[i].name, spaces, false)
+      +dirRow(dir[i].name, dir[i].contents, spaces, false)
     else
-      +dirRow(dir[i].name, spaces, true)
+      +dirRow(dir[i].name, dir[i].contents, spaces, true)

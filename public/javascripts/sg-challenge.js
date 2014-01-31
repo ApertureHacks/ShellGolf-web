@@ -39,6 +39,11 @@ $('.panel-heading a').on('click',function(e){
     }
 });
 
+function showContents(name, contents) {
+  $('#filename_heading').text('File Contents: ' + name);
+  $('#file_contents').val(contents);
+  $('#contents_area').show();
+}
 
 /**
  *  Appends the output of an executed command to the accordion.
