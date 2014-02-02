@@ -15,15 +15,13 @@ challenge.submit = function(req, res){
   var timeout;
 
   getChallenge(req, res, id, function(challenge){
-    var listener = function(msg) {
+    var listener = function(result) {
       clearTimeout(timeout);
       var score;
-      if (msg.result) {
-        score = scoreChallenge(commands);
+      if (result.success) {
+        result.score = scoreChallenge(commands);
       }
-      res.send({ success: msg.result
-               , score: score
-               , output: msg.output });
+      res.send(result);
     };
 
     queue.challenge(challenge._id, commands, listener);

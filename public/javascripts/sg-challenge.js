@@ -10,12 +10,12 @@ $("#submit_code").click(function(btn){
     type: 'POST',
     url: window.location.pathname + "/submit",
     data: { commands: commands },
-    success: function(data){
-      showOutput(data.output);
-      if (data.success) {
+    success: function(result){
+      showOutput(result.output);
+      if (result.success) {
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
-        showScore(data.score);
+        showScore(result.score);
         $btn.removeClass("btn-info btn-warning");
         $btn.addClass("btn-success");
       } else {
