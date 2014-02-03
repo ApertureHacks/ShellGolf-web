@@ -16,5 +16,9 @@
     "passport": "0.x",
     "passport-twitter": "1.x",
     "uuid": "~1.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "sinon": "~1.8.1"
   }
 }
