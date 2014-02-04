@@ -1,4 +1,4 @@
-var Challenge = require('../lib/db/challenge')
+var Challenge = require('../lib/db/Challenge')
   , sinon = require('sinon')
   , should = require('should')
   , mongoose = require('mongoose')

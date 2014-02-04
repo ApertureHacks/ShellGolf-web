@@ -1,6 +1,6 @@
 var helpers = require('../lib/helpers')
   , sinon = require('sinon')
-  , User = require('../lib/db/user.js')
+  , User = require('../lib/db/User.js')
   , assert = require('assert');
 
 describe('helpers', function() {
