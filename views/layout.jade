@@ -24,10 +24,10 @@ html
                     img.user-thumbnail(src=user.image)
                 li
                   +navLink('/logout', 'Log Out').glyphicon.glyphicon-log-out
-                  if user.is_admin
+                  if user.isAdmin()
                     li
                       +navLink('/admin', 'Admin').glyphicon.glyphicon-cog
-                  if user.is_author
+                  if user.isAuthor()
                     li
                       +navLink('/challenge/create', 'New Challenge').glyphicon.glyphicon-edit
               else

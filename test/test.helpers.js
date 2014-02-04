@@ -1,5 +1,6 @@
 var helpers = require('../lib/helpers')
   , sinon = require('sinon')
+  , User = require('../lib/db/user.js')
   , assert = require('assert');
 
 describe('helpers', function() {
@@ -23,7 +24,7 @@ describe('helpers', function() {
     });
 
     it('should just call next if user is defined', function() {
-      var req = { user: 'jmatth' }
+      var req = { user: new User() }
         , res = {}
         , next = sinon.spy();
 
@@ -54,8 +55,8 @@ describe('helpers', function() {
       assert.equal(typeof(res.redirect.args[0][0]), 'string');
     });
 
-    it('should redirect if user.is_admin is not true', function() {
-      var req = { user: { is_admin: false } }
+    it('should redirect if user is not an admin', function() {
+      var req = { user: new User() }
         , res = {};
       req.flash = sinon.spy();
       res.redirect = sinon.spy();
@@ -92,8 +93,8 @@ describe('helpers', function() {
       assert.equal(typeof(res.redirect.args[0][0]), 'string');
     });
 
-    it('should redirect if user.is_author is not true', function() {
-      var req = { user: { is_author: false } }
+    it('should redirect if user is not an author', function() {
+      var req = { user: new User() }
         , res = {};
       req.flash = sinon.spy();
       res.redirect = sinon.spy();
