@@ -11,7 +11,7 @@ $("#submit_code").click(function(btn){
     url: window.location.pathname + "/submit",
     data: { commands: commands },
     success: function(result){
-      showOutput(result.output);
+      showOutput(result.output, !result.success);
       if (result.success) {
         var strlen = commands.length;
         var cmds = (commands.split(";")).length + (commands.split("|")).length;
@@ -29,11 +29,8 @@ $("#submit_code").click(function(btn){
   });
 });
 
-// Make sure that either the before or after pane is always open
-$('.panel-heading a').on('click',function(e){
-    if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
-        e.stopPropagation();
-    }
+$('#states-accordion').on('show.bs.collapse', function () {
+    $('#states-accordion .in').collapse('hide');
 });
 
 function showContents(name, contents) {
@@ -47,10 +44,12 @@ function showContents(name, contents) {
  *
  *  @method showOutput
  *  @param {String} output Output returned from the server.
+ *  @param {Boolean} popup Whether to open the output panel in the accordion.
  */
-function showOutput(output) {
+function showOutput(output, popup) {
   $('#pre-output').html(output);
   $('#panel-output').removeAttr('style');
+  if (popup) $('#collapse-output').collapse('show');
 }
 
 /**
@@ -62,4 +61,5 @@ function showOutput(output) {
 function showScore(score) {
   $('#score').html('Success!<br />Score: ' + score);
   $('#panel-score').removeAttr('style');
+  $('#collapse-score').collapse('show');
 }
