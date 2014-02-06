@@ -4,9 +4,15 @@ var Challenge = require('../lib/db/Challenge')
   , mongoose = require('mongoose')
   , assert = require('assert');
 
-mongoose.connect('mongodb://localhost/shellgolf_test');
 
 describe('Challenge', function() {
+
+  before(function(done) {
+    mongoose.connect('mongodb://localhost/shellgolf_test', function() {
+      done();
+    });
+  });
+
   it('should sort start and end lists when saving', function(done) {
     var startFiles = [{ name: 'katie', contents: '' }
                      ,{ name: 'josh', contents: '' }];
@@ -44,9 +50,11 @@ describe('Challenge', function() {
   });
 
   // remove our test data after we're done
-  afterEach(function(done) {
+  after(function(done) {
     Challenge.remove({}, function() {
-      done();
+      mongoose.connection.close(function() {
+        done();
+      });
     });
   });
 });
