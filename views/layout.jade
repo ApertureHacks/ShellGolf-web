@@ -22,14 +22,14 @@ html
                 li
                   a(href='/user/stats')
                     img.user-thumbnail(src=user.image)
-                li
-                  +navLink('/logout', 'Log Out').glyphicon.glyphicon-log-out
                   if user.isAdmin()
                     li
                       +navLink('/admin', 'Admin').glyphicon.glyphicon-cog
                   if user.isAuthor()
                     li
                       +navLink('/challenge/create', 'New Challenge').glyphicon.glyphicon-edit
+                li
+                  +navLink('/logout', 'Log Out').glyphicon.glyphicon-log-out
               else
                 li
                   //- +navLink('/auth/twitter', 'Log In').glyphicon.glyphicon-log-in
