@@ -14,16 +14,6 @@ module.exports = function() {
         return a.name < b.name ? -1 : 1;
       };
 
-      var compareArrs = function(a, b) {
-        if (a.length !== b.length) return false;
-        for (var i = 0; i < a.length; i++) {
-          if (a[i].name !== b[i].name) {
-            return false;
-          }
-        }
-        return true;
-      };
-
       var testChallenge = new Challenge();
       testChallenge.name = 'Test challenge';
       testChallenge.description = 'Created while running mocha tests.';
@@ -33,8 +23,8 @@ module.exports = function() {
       testChallenge.save(function(err, challenge) {
         assert.ifError(err);
         challenge.should.have.property('start');
-        assert(compareArrs(challenge.start, startFiles.sort(sortFiles)));
-        assert(compareArrs(challenge.end, endFiles.sort(sortFiles)));
+        assert.deepEqual(challenge.toObject().start, startFiles.sort(sortFiles));
+        assert.deepEqual(challenge.toObject().end, endFiles.sort(sortFiles));
         done();
       });
     });
