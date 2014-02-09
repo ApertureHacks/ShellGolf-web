@@ -9,6 +9,8 @@ var config = require('./config')
   , requireLogin =  require('./lib/helpers').requireLogin
   , requireAdmin =  require('./lib/helpers').requireAdmin
   , requireAuthor = require('./lib/helpers').requireAuthor
+  , db = require('./lib/db')
+  , queue = require('./lib/queue')
   , routes = require('./routes');
 
 var app = express();
@@ -64,6 +66,8 @@ app.get('/logout', function(req, res){
     res.redirect('/');
 });
 
+db.connect();
+queue.connect();
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
