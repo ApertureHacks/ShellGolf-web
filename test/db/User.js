@@ -1,4 +1,4 @@
-var User = require('../lib/db/User')
+var User = require('../../lib/db/User')
   , assert = require('assert');
 
 module.exports = function() {

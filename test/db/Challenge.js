@@ -1,6 +1,4 @@
-var Challenge = require('../lib/db/Challenge')
-  , User = require('./db.User')
-  , should = require('should')
+var Challenge = require('../../lib/db/Challenge')
   , assert = require('assert');
 
 module.exports = function() {
@@ -33,7 +31,7 @@ module.exports = function() {
       testChallenge.start = startFiles;
       testChallenge.end = endFiles;
       testChallenge.save(function(err, challenge) {
-        should.not.exist(err);
+        assert.ifError(err);
         challenge.should.have.property('start');
         assert(compareArrs(challenge.start, startFiles.sort(sortFiles)));
         assert(compareArrs(challenge.end, endFiles.sort(sortFiles)));

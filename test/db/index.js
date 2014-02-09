@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
-  , User = require('./db.User')
-  , Challenge = require('./db.Challenge');
+  , User = require('./User')
+  , Challenge = require('./Challenge');
 
 describe('db', function() {
   // Need to have a connection to the database to test
