@@ -25,11 +25,8 @@ challenge.submit = function(req, res){
 
     queue.challenge(challenge._id, commands, listener);
 
-    console.log('settting timeout');
     timeout = setTimeout(function() {
-      console.log('timeout triggered');
-      res.write('{"success": false}');
-      res.end();
+      res.send({ success: false });
     }, 30000);
   });
 };
