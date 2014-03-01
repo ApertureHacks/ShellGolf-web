@@ -9,21 +9,20 @@
     "mocha": "./node_modules/.bin/mocha"
   },
   "dependencies": {
-    "amqp": "~0.1.8",
-    "bytes": "0.x",
-    "connect-flash": "0.x",
-    "express": "3.x",
-    "jade": "1.x",
-    "mongoose": "3.x",
-    "node-ironio": "~0.4.0",
-    "passport": "0.x",
-    "passport-twitter": "1.x",
-    "uuid": "~1.4.1"
+    "amqp": "0.1.8",
+    "bytes": "0.2.1",
+    "connect-flash": "0.1.1",
+    "express": "3.4.8",
+    "jade": "1.1.5",
+    "mongoose": "3.8.8",
+    "passport": "0.2.0",
+    "passport-twitter": "1.0.2",
+    "uuid": "1.4.1"
   },
   "devDependencies": {
-    "jshint": "~2.4.3",
-    "mocha": "~1.17.1",
-    "should": "~3.1.2",
-    "sinon": "~1.8.1"
+    "jshint": "^2.4.4",
+    "mocha": "^1.17.1",
+    "should": "^3.1.3",
+    "sinon": "^1.8.2"
   }
 }
