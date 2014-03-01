@@ -65,7 +65,7 @@ challenge.create.submit = function(req, res) {
     // FIXME: still need description and instructions in here.
     challenge = new db.Challenge();
     // challenge.owner = req.user._id;
-    challenge.name = newChallenge.title;
+    challenge.title = newChallenge.title;
     challenge.description = newChallenge.description;
     challenge.instructions = newChallenge.instructions;
     challenge.start = newChallenge.start;
