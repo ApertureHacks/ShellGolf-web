@@ -37,29 +37,25 @@ challenge.create = function(req, res){
 
 challenge.create.submit = function(req, res) {
   var newChallenge = req.body.challenge;
-  var requiredFields = ['title', 'start', 'end'];
+  var requiredFields = ['title', 'start', 'end', 'title', 'description'
+                       ,'instructions'];
 
   for (var i = 0, len = requiredFields.length; i < len; i++) {
     if (! newChallenge[requiredFields[i]]) {
-      res.write(JSON.stringify(
-          {
-            success: false
-          , error: 'Missing field: ' + requiredFields[i]
-          }
-      ));
-      return res.end();
+      return res.send( { success: false
+                       , error: 'Missing field: ' + requiredFields[i] });
     }
   }
 
-  db.Challenge.findOne({ title: newChallenge.title }).exec(function(err, challenge) {
+  db.Challenge.findOne({ title: newChallenge.title }, function(err, challenge) {
     if(err) {
-      return res.json({ success: false
+      return res.send({ success: false
                       , error: 'Error connecting to database.' });
     }
 
     if (challenge) {
-      return res.json({ success: false
-                      , error: 'A chalenge with that title already exists.' });
+      return res.send({ success: false
+                      , error: 'A challenge with that title already exists.' });
     }
 
     // FIXME: still need description and instructions in here.
@@ -73,10 +69,10 @@ challenge.create.submit = function(req, res) {
 
     challenge.save(function(err) {
       if (err) {
-        return res.json({ success: false
+        return res.send({ success: false
                         , err: err});
       }
-      res.json({ success: true });
+      res.send({ success: true });
     });
   });
 };

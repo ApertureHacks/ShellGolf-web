@@ -133,5 +133,81 @@ module.exports = function() {
         });
       });
     });
+
+    describe('create()', function() {
+      it('should render the create challenge view', function() {
+        challenge.create(req, res);
+
+        res.render.calledOnce.should.be.ok;
+        res.render.firstCall.args[0].should.equal('challenge/create');
+      });
+
+      describe('submit()', function() {
+        var requiredFields = ['title', 'start', 'end', 'title', 'description'
+                             ,'instructions'];
+
+        for (var i = 0, len = requiredFields.length; i < len; i++) {
+          it('should error out if ' + requiredFields[i] + ' is missing', function() {
+            var testChallenge = {};
+            for (var j = 0; j < requiredFields.length; j++) {
+              var field = requiredFields[i];
+              if (j !== i) {
+                testChallenge[field] = (field == 'start' || field == 'end') ? {} : 'Filler for ' + field;
+              }
+            }
+
+            req.body = { challenge: testChallenge };
+
+            challenge.create.submit(req, res);
+            res.send.calledOnce.should.be.true;
+            res.send.firstCall.args[0].success.should.be.false;
+          });  //jshint ignore: line
+        }
+
+        it('should work if all required fields are set', function() {
+          var testChallenge = {};
+          for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            testChallenge[field] = (field == 'start' || field == 'end') ? {} : 'Filler for ' + field;
+          }
+
+          req.body = { challenge: testChallenge };
+          sinon.stub(db.Challenge, 'findOne');
+
+          challenge.create.submit(req, res);
+
+          db.Challenge.findOne.calledOnce.should.be.ok;
+
+          db.Challenge.findOne.restore();
+        });
+
+        it('should error out if a challenge already has that title', function(done) {
+          var testChallenge = new db.Challenge();
+          for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            testChallenge[field] = (field == 'start' || field == 'end') ? {} : 'Filler for ' + field;
+          }
+
+          sinon.stub(db.Challenge, 'findOne', function(obj, cb) {
+            db.Challenge.findOne.restore();
+            db.Challenge.findOne(obj, function(err, challenge) {
+              should.not.exist(err);
+
+              cb(err, challenge);
+
+              res.send.calledOnce.should.be.true;
+              res.send.firstCall.args[0].success.should.be.false;
+              done();
+            });
+          });
+
+          testChallenge.save(function(err) {
+            should.not.exist(err);
+            req.body = { challenge: testChallenge.toObject() };
+            challenge.create.submit(req, res);
+          });
+        });
+      });
+    });
   });
 };
