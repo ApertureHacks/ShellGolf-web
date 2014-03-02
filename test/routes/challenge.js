@@ -207,6 +207,37 @@ module.exports = function() {
             challenge.create.submit(req, res);
           });
         });
+
+        it('should save the new challenge if all fields are provided', function(done) {
+          var testChallenge = {};
+          for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            testChallenge[field] = (field == 'start' || field == 'end') ? {} : 'Filler for ' + field;
+          }
+          req.body = { challenge: testChallenge };
+
+          sinon.stub(db.Challenge, 'findOne', function(obj, cb) {
+            db.Challenge.findOne.restore();
+            sinon.stub(db, 'Challenge', function() {
+              this.save = function(cb) {
+                cb();
+
+                res.send.calledOnce.should.be.true;
+                res.send.firstCall.args[0].success.should.be.true;
+                for (var i = 0; i < requiredFields.length; i++) {
+                  var field = requiredFields[i];
+                  this[field].should.equal(testChallenge[field]);
+                }
+
+                db.Challenge.restore();
+                done();
+              };
+            });
+            cb();
+          });
+
+          challenge.create.submit(req, res);
+        });
       });
     });
   });
